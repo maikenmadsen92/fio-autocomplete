@@ -1,18 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <autocomplete :dataitems="itemsData"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import autocomplete from './components/autocomplete.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
-  }
+    autocomplete
+  },
+   data () {
+    return {
+      itemsData: [
+        {'header': 'Pige navne'},
+        {'text': 'Amalie'},
+        {'text': 'Anne'},
+        {'text': 'Anna'},
+        {'text': 'Alma'},
+        {'text': 'Asta'},
+        {'header': 'Drenge navne'},
+        {'text': 'Anders'},
+        {'text': 'Andreas'},
+        {'text': 'Allan'},
+      ]
+    }
+  },
 }
 </script>
 
