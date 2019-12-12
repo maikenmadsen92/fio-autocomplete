@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <autocomplete :dataitems="itemsData"/>
+    <autocomplete v-on:sync="valueChanged" :dataitems="itemsData"/>
   </div>
 </template>
 
@@ -15,19 +15,37 @@ export default {
    data () {
     return {
       itemsData: [
+        // {'header': 'Pige navne'},
+        // {'text': 'Amalie'},
+        // {'text': 'Anne'},
+        // {'text': 'Anna'},
+        // {'text': 'Alma'},
+        // {'text': 'Asta'},
+        // {'header': 'Drenge navne'},
+        // {'text': 'Brian'},
+        // {'text': 'Benny'},
+        // {'text': 'Biver'},
+      ]
+    }
+  },
+
+  methods: {
+    valueChanged: function (val) {
+
+      this.itemsData = [];
+
+      this.itemsData = [
         {'header': 'Pige navne'},
         {'text': 'Amalie'},
         {'text': 'Anne'},
         {'text': 'Anna'},
         {'text': 'Alma'},
-        {'text': 'Asta'},
-        {'header': 'Drenge navne'},
-        {'text': 'Anders'},
-        {'text': 'Andreas'},
-        {'text': 'Allan'},
+        {'text': 'Asta'}
       ]
     }
-  },
+    
+  }
+
 }
 </script>
 

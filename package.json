@@ -28,12 +28,8 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+      "plugin:vue/essential"
     ],
-    "rules": {
-      "no-console": "error"
-    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

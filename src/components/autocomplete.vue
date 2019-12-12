@@ -1,18 +1,26 @@
 <template>
   <div>
-   
-    <div class="form__group">
-      <input type="email" id="email" class="form__field" placeholder="Your Email">
+    <div class="input-container">
+      <input 
+        id="autocomplete-input" 
+        class="input-placer" 
+        placeholder="Your name"
+        @input="valueChangedInInput"
+      >
       <label for="email" class="form__label">Your Email</label>
     </div>
     <div> hej {{dateItemsList}}</div>
       <div id="suggestion-container">
         <div class="suggestion-item" v-for="(item, i) in dateItemsList" v-bind:key="i">
-          <span class="suggestion-text"> {{item.text}} </span>
+          <span v-show="item.header" class="suggestion-header"> {{item.header}} </span>
+          <div v-show="item.text" class="suggestion-text-container">
+            <span class="suggestion-text" v-html="item.text"></span>
+          </div>
         </div>
       </div>
-    </div>
+  </div>
 </template>
+
 <script>
 export default {
   name: 'autocomplete',
@@ -25,7 +33,36 @@ export default {
   watch: {
     dataitems: function () {
 
-      this.dateItemsList = this.$props.dataitems;
+      var dataAfterSync = this.$props.dataitems;
+      var newStringOfWords = '';
+      var dataList = [];
+
+      dataAfterSync.forEach(element => {
+        var autoObj = {};
+
+        if(element.header) {
+          autoObj['header'] = element.header
+        }
+        else {
+
+          var searchVal = document.getElementById("autocomplete-input").value;
+          var elementTest = element.text;
+          var elementTestToSmallCase = elementTest.toLowerCase();
+          var searchvalSmallCase = searchVal.toLowerCase();
+          var newStringOfWords = '';
+          var searchvalSmallCaseFirstUpperCase = searchvalSmallCase.charAt(0).toUpperCase() + searchvalSmallCase.slice(1);
+          var newWords = '<b>' + searchvalSmallCaseFirstUpperCase + '</b>';
+          newStringOfWords = elementTestToSmallCase.replace(searchvalSmallCase, newWords)
+          autoObj['text'] = newStringOfWords
+
+        }
+      
+        dataList.push(autoObj)
+
+      });
+
+      this.dateItemsList = dataList;
+      
     }
   },
 
@@ -34,20 +71,25 @@ export default {
   },
   
   methods: {
-    
+    valueChangedInInput: function () {
+      
+      var inputval = document.getElementById("autocomplete-input").value;
+      this.$emit('sync', inputval)
+
+    }
   }
 }
 </script>
 
 <style scoped>
-.form__group {
+.input-container {
   position: relative;
   padding: 15px 0 15px;
   margin-top: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.form__field {
+.input-placer {
   font-family: inherit;
   width: 100%;
   border: 0;
@@ -60,11 +102,11 @@ export default {
   margin-left: 20px;
 }
 
-.form__field::placeholder {
+.input-placer::placeholder {
   color: transparent;
 }
 
-.form__field:placeholder-shown ~ .form__label {
+.input-placer:placeholder-shown ~ .form__label {
   font-size: 16px;
   cursor: text;
   top: 20px;
@@ -81,7 +123,7 @@ label {
   left: 20px;
 }
 
-.form__field:focus ~ .form__label {
+.input-placer:focus ~ .form__label {
   position: absolute;
   top: 3px;
   display: block;
@@ -90,7 +132,7 @@ label {
   color: #9b9b9b;
 }
 
-.form__field:focus ~ .form__label {
+.input-placer:focus ~ .form__label {
   color: #009788;
   left: 20px;
 }
@@ -100,16 +142,28 @@ label {
   margin-top: -43px;
   position: relative;
   background-color: white;
-  border-color: #F1F1F1;
-  border-style: solid;
   border-width: 0px 1px 1px 1px;
   border-radius: 0px 0px 10px 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   text-align: left;
 }
 
-.suggestion-item {
+.suggestion-header {
+  padding: 2px 20px 2px 20px;
+  font-family: inherit;
+  align-items: center;
+  display: flex;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #9b9b9b;
+}
+
+.suggestion-text-container {
   padding: 5px 20px 5px 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .suggestion-text {
