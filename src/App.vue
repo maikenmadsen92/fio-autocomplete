@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <autocomplete v-on:sync="valueChanged" :dataitems="itemsData"/>
+    <autocomplete :label="label" v-on:itemClicked="itemIsClicked" v-on:sync="valueChanged" :dataitems="itemsData"/>
   </div>
 </template>
 
@@ -14,17 +14,18 @@ export default {
   },
    data () {
     return {
+      label: 'Skriv et navn',
       itemsData: [
-        // {'header': 'Pige navne'},
-        // {'text': 'Amalie'},
-        // {'text': 'Anne'},
-        // {'text': 'Anna'},
-        // {'text': 'Alma'},
-        // {'text': 'Asta'},
-        // {'header': 'Drenge navne'},
-        // {'text': 'Brian'},
-        // {'text': 'Benny'},
-        // {'text': 'Biver'},
+        {'header': 'Pige navne'},
+        {'text': 'Amalie', 'value': 'here is a value'},
+        {'text': 'Anne', 'value': 'here is a value'},
+        {'text': 'Anna', 'value': 'here is a value'},
+        {'text': 'Alma', 'value': 'here is a value'},
+        {'text': 'Asta', 'value': 'here is a value'},
+        {'header': 'Drenge navne'},
+        {'text': 'Brian', 'value': 'here is a value'},
+        {'text': 'Benny', 'value': 'here is a value'},
+        {'text': 'Biver', 'value': 'here is a value'},
       ]
     }
   },
@@ -35,13 +36,17 @@ export default {
       this.itemsData = [];
 
       this.itemsData = [
-        {'header': 'Pige navne'},
-        {'text': 'Amalie'},
-        {'text': 'Anne'},
-        {'text': 'Anna'},
-        {'text': 'Alma'},
-        {'text': 'Asta'}
+        {'header': 'Pige navne', 'value': 'here is a value'},
+        {'text': 'Amalie', 'value': 'here is a value'},
+        {'text': 'Anne', 'value': 'here is a value'},
+        {'text': 'Anna', 'value': 'here is a value'},
+        {'text': 'Alma', 'value': 'here is a value'},
+        {'text': 'Asta', 'value': 'here is a value'}
       ]
+    },
+
+    itemIsClicked: function (val) {
+      console.log('items is clicked ' + JSON.stringify(val))
     }
     
   }

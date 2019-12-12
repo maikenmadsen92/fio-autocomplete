@@ -4,16 +4,15 @@
       <input 
         id="autocomplete-input" 
         class="input-placer" 
-        placeholder="Your name"
+        :placeholder="labelForAutocomplete"
         @input="valueChangedInInput"
       >
-      <label for="email" class="form__label">Your Email</label>
+      <label for="email" class="form__label">{{labelForAutocomplete}}</label>
     </div>
-    <div> hej {{dateItemsList}}</div>
       <div id="suggestion-container">
         <div class="suggestion-item" v-for="(item, i) in dateItemsList" v-bind:key="i">
           <span v-show="item.header" class="suggestion-header"> {{item.header}} </span>
-          <div v-show="item.text" class="suggestion-text-container">
+          <div @click="itemIsClicked(item)" v-show="item.text" class="suggestion-text-container">
             <span class="suggestion-text" v-html="item.text"></span>
           </div>
         </div>
@@ -24,10 +23,11 @@
 <script>
 export default {
   name: 'autocomplete',
-  props: ['dataitems'],
+  props: ['dataitems', 'label'],
   data () {
     return {
-      dateItemsList: []
+      dateItemsList: [],
+      labelForAutocomplete: this.$props.label
     }
   },
   watch: {
@@ -54,6 +54,7 @@ export default {
           var newWords = '<b>' + searchvalSmallCaseFirstUpperCase + '</b>';
           newStringOfWords = elementTestToSmallCase.replace(searchvalSmallCase, newWords)
           autoObj['text'] = newStringOfWords
+          autoObj['value'] = element.value
 
         }
       
@@ -72,11 +73,22 @@ export default {
   
   methods: {
     valueChangedInInput: function () {
-      
+
       var inputval = document.getElementById("autocomplete-input").value;
       this.$emit('sync', inputval)
 
+    },
+
+    itemIsClicked: function (item) {
+
+      var pressedItem = {};
+      var StrippedString = item.text.replace(/(<([^>]+)>)/ig,"");
+      pressedItem['text'] = StrippedString;
+      pressedItem['value'] = item.value
+      this.$emit('itemClicked', pressedItem)
+
     }
+
   }
 }
 </script>
@@ -139,7 +151,6 @@ label {
 
 #suggestion-container {
   overflow-y: auto;
-  margin-top: -43px;
   position: relative;
   background-color: white;
   border-width: 0px 1px 1px 1px;
