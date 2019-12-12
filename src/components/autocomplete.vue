@@ -5,9 +5,13 @@
       <input type="email" id="email" class="form__field" placeholder="Your Email">
       <label for="email" class="form__label">Your Email</label>
     </div>
-   
     <div> hej {{dateItemsList}}</div>
-  </div>
+      <div id="suggestion-container">
+        <div class="suggestion-item" v-for="(item, i) in dateItemsList" v-bind:key="i">
+          <span class="suggestion-text"> {{item.text}} </span>
+        </div>
+      </div>
+    </div>
 </template>
 <script>
 export default {
@@ -89,6 +93,27 @@ label {
 .form__field:focus ~ .form__label {
   color: #009788;
   left: 20px;
+}
+
+#suggestion-container {
+  overflow-y: auto;
+  margin-top: -43px;
+  position: relative;
+  background-color: white;
+  border-color: #F1F1F1;
+  border-style: solid;
+  border-width: 0px 1px 1px 1px;
+  border-radius: 0px 0px 10px 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  text-align: left;
+}
+
+.suggestion-item {
+  padding: 5px 20px 5px 20px;
+}
+
+.suggestion-text {
+  font-family: inherit;
 }
 
 </style>
