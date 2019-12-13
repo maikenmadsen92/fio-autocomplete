@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import autocomplete from './components/autocomplete.vue'
+import autocomplete from './fio-autocomplete.vue'
 
 export default {
   name: 'app',
@@ -14,19 +14,8 @@ export default {
   },
    data () {
     return {
-      label: 'Skriv et navn',
-      itemsData: [
-        {'header': 'Pige navne'},
-        {'text': 'Amalie', 'value': 'here is a value'},
-        {'text': 'Anne', 'value': 'here is a value'},
-        {'text': 'Anna', 'value': 'here is a value'},
-        {'text': 'Alma', 'value': 'here is a value'},
-        {'text': 'Asta', 'value': 'here is a value'},
-        {'header': 'Drenge navne'},
-        {'text': 'Brian', 'value': 'here is a value'},
-        {'text': 'Benny', 'value': 'here is a value'},
-        {'text': 'Biver', 'value': 'here is a value'},
-      ]
+      label: 'Write a name',
+      itemsData: []
     }
   },
 
@@ -36,12 +25,16 @@ export default {
       this.itemsData = [];
 
       this.itemsData = [
-        {'header': 'Pige navne', 'value': 'here is a value'},
-        {'text': 'Amalie', 'value': 'here is a value'},
-        {'text': 'Anne', 'value': 'here is a value'},
-        {'text': 'Anna', 'value': 'here is a value'},
-        {'text': 'Alma', 'value': 'here is a value'},
-        {'text': 'Asta', 'value': 'here is a value'}
+        {'header': 'Girls name'},
+        {'text': 'Amelia', 'value': 'here is a value'},
+        {'text': 'Alexa', 'value': 'here is a value'},
+        {'text': 'Ariana', 'value': 'here is a value'},
+        {'text': 'Annabelle', 'value': 'here is a value'},
+        {'text': 'Alexandra', 'value': 'here is a value'},
+        {'header': 'Boys name'},
+        {'text': 'Antonio', 'value': 'here is a value'},
+        {'text': 'Andrew', 'value': 'here is a value'},
+        {'text': 'Alexander', 'value': 'here is a value'},
       ]
     },
 

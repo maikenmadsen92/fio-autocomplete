@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'autocomplete',
+  name: 'fio-autocomplete',
   props: ['dataitems', 'label'],
   data () {
     return {

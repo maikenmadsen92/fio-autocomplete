@@ -1,14 +1,20 @@
 {
   "name": "fio-autocomplete",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.3",
+  "description": "A simple autocomplete with header",
+  "author": {
+    "name": "Maiken Madsen"
+  },
+  "private": false,
+  "files": ["dist"],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "build-lib": "vue-cli-service build --target lib --name dummylib src/main.js",
-    "main": "./dist/dummylib.common.js"
+    "build:npm": "vue-cli-service build --target lib --name fio-autocomplete src/fio-autocomplete.vue"
   },
+  "main": "dist/fio-autocomplete.umd.js",
+  "unpkg": "dist/fio-autocomplete.umd.min.js",
+
   "dependencies": {
     "core-js": "^3.4.3",
     "vue": "^2.6.10"
