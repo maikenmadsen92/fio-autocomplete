@@ -41,3 +41,13 @@ It's optional if you want to parse some headers.
 
 ## Example
 
+In the github project src/App.vue a simple example is presented.
+
+### Youtube
+
+Here is a short link with a simple presentation: https://youtu.be/PBZrQhqNOr0 
+
+
+## Github
+
+Link: https://github.com/maikenmadsen1992/fio-autocomplete.git
